@@ -19,8 +19,14 @@ export const findUserByEmailRole = async (email, role) => {
   return await User.findOne({ email, role });
 };
 
+export const findUserByIdRole = async (id, role) => {
+  return await User.findOne({ _id: id, role });
+}
+
 export const updateUser = async (id, updateData) => {
-  return await User.findByIdAndUpdate(id, updateData, { new: true });
+  return await User.findByIdAndUpdate(id, updateData, {
+    new: true,
+  });
 };
 
 export const deleteUser = async (id) => {
@@ -28,5 +34,5 @@ export const deleteUser = async (id) => {
 };
 
 export const findAll = async (role) => {
-  return await User.find({ role }).select("-password"); 
+  return await User.find({ role }).select("-password");
 };

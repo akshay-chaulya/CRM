@@ -38,8 +38,8 @@ const authMiddleware = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(
       new AppError(
-        `User does not exist (ID: ${payload.id}). Please register or contact support.`,
-        404
+        "Authentication failed: Token invalid. Please log in again.",
+        401
       )
     );
   }

@@ -48,9 +48,9 @@ export const login = async ({ email, password }, role) => {
 };
 
 export const updateStaff = async (id, { email, password, role, name }) => {
-  const user = await authRepository.findUserById(id);
+  const user = await authRepository.findUserByIdRole(id, "staff");
   if (!user) {
-    throw new AppError("User not found", 404);
+    throw new AppError("Staff not found", 404);
   }
 
   // Remove undefined fields
@@ -63,13 +63,13 @@ export const updateStaff = async (id, { email, password, role, name }) => {
   return await authRepository.updateUser(id, updateData);
 };
 
-export const deleteStaff = async (id) => {  
+export const deleteStaff = async (id) => {
   const user = await authRepository.findUserById(id);
   if (!user) {
     throw new AppError("User not found", 404);
   }
   return await authRepository.deleteUser(id);
-}
+};
 
 export const getAllStaffs = async () => {
   const staffs = await authRepository.findAll("staff");
