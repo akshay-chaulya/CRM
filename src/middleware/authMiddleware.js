@@ -34,7 +34,7 @@ const authMiddleware = catchAsync(async (req, res, next) => {
     );
   }
 
-  const user = await authRepository.findUserById(payload.id);
+  const user = await authRepository.findUserById(payload.id, true);
   if (!user) {
     return next(
       new AppError(

@@ -12,10 +12,20 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       lowercase: true,
+      trim: true,
     },
-    profileImage: {
+    phone: {
       type: String,
-      default: null,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    staff_id: {
+      type: String,
+      unique: true,
+      required: function () {
+        return this.role === "staff";
+      },
     },
     role: {
       type: String,
@@ -28,13 +38,11 @@ const userSchema = new mongoose.Schema(
     },
     added_by: {
       id: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: false,
-      },
-      name: {
-        type: String,
-        required: false,
+        required: function () {
+          return this.role !== "admin";
+        },
       },
     },
   },

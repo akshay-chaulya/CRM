@@ -10,8 +10,8 @@ import connectDB from "./config/db.js";
 
 export const app = express();
 
-// Conditional logging in developement
-if (nodeEnv === "developement") app.use(morgan("dev"));
+// Conditional logging in development
+if (nodeEnv === "development") app.use(morgan("dev"));
 
 // Parse JSON bodies (limit size to prevent DOS via large payloads)
 app.use(express.json({ limit: "10kb" }));

@@ -1,11 +1,11 @@
 import AppError from "../utils/AppError.js";
 
-const checkRole = (role) => {
+const checkRole = (allowedRoles) => {
   return (req, res, next) => {
-    if (req.user.role !== role) {
+    if (!allowedRoles.includes(req.user.role)) {
       return next(
         new AppError(
-          `Access denied! You do not have permission to perform this action. Because your role is ${req.user.role} but only ${role} is allowed`,
+          `Access denied! Your role is "${req.user.role}", but only [${allowedRoles.join(", ")}] are allowed.`,
           403
         )
       );
@@ -13,5 +13,6 @@ const checkRole = (role) => {
     next();
   };
 };
+
 
 export default checkRole;

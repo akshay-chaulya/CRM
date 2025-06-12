@@ -18,7 +18,7 @@ export const createStaff = catchAsync(async (req, res) => {
   const data = await authService.createStaff(req.body, req.user);
   res.status(StatusCodes.CREATED).json({
     status: "success",
-    message: "User registered successfully",
+    message: "Staff created successfully",
     data,
   });
 });
